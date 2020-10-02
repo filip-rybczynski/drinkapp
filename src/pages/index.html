@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Drinkapp: the app to count drinks</title>
-    <meta name="description" content="Simple app to count number of drinks per day" />
+    <meta
+      name="description"
+      content="Simple app to count number of drinks per day"
+    />
     <!-- Title -->
     <meta property="og:title" content="Drinkapp: the app to count drinks" />
     <!-- OPTIONAL description. 2-4 sentences. -->
@@ -146,10 +149,19 @@
   </head>
   <body>
     <header>
-      <h1>Drinkapp</h1>
+      <h1 class="main-header">Drinkapp</h1>
     </header>
-    <main>
-      Placeholder
+    <main class="counter">
+      <h2 class="counter__type">Water</h2>
+
+      <div class="counter__display">
+        <img class="counter__image" src="../assets/img/water.svg" alt="WTF " />
+
+        <div class="counter__value">0</div>
+      </div>
+      <button class="counter__button--add">Add glass</button>
+
+      <button class="counter__button--remove">Remove glass</button>
     </main>
   </body>
 </html>
