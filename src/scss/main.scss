@@ -5,22 +5,35 @@
 
 body {
   background: $water;
-  color: #fff;
+  color: $water-text;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
 }
 
 .counter {
-  color: #fff;
   padding: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   height: 70vh;
+
+&__button {
+
+  &--add {
+    color: #000046
+  }
+
+  &--remove {
+    background: none;
+    border: none;
+    color: $water-text;
+  }
+}
 
   &__display {
 
@@ -38,10 +51,11 @@ body {
 
   &__value {
     font-size: 9em;
+    color: #000046;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 25%;
+    bottom: 27%;
     text-align: center;
     // margin-bottom: -1em;
   }

@@ -6,4 +6,16 @@ import '../scss/main.scss';
 
 /* place your code below */
 
-console.log('HELLO 🚀')
+const counterValue = document.querySelector(".value--js");
+const counterMax = document.querySelector(".max--js");
+const addButton = document.querySelector(".add--js");
+const removeButton = document.querySelector(".remove--js");
+
+addButton.addEventListener("click", () => {
+    counterValue.innerHTML++;
+})
+
+removeButton.addEventListener("click", () => {
+    counterValue.innerHTML--;
+})
+
