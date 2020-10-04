@@ -16,6 +16,7 @@ addButton.addEventListener("click", () => {
 })
 
 removeButton.addEventListener("click", () => {
-    counterValue.innerHTML--;
+    if(counterValue.innerHTML > 0) {
+        counterValue.innerHTML--;
+    }
 })
-
