@@ -14,8 +14,7 @@ const removeButton = document.querySelector(".remove--js");
 addButton.addEventListener("click", () => {
     counterValue.innerHTML++;
     if (counterValue.innerHTML == 10) {
-        counterValue.classList.toggle("counter__value--smaller");
-
+        counterValue.style.fontSize = "6.2em"
     }
 })
 
@@ -23,7 +22,7 @@ removeButton.addEventListener("click", () => {
     if(counterValue.innerHTML > 0) {
         counterValue.innerHTML--;
         if (counterValue.innerHTML == 9) {
-            counterValue.classList.toggle("counter__value--smaller");
+            counterValue.style.fontSize = "9em"
         }
     }
 })
