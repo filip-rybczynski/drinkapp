@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -20,22 +20,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 70vh;
+  height: 80vh;
 
-&__button {
+  
 
-  &--add {
-    color: #000046
+  &__type {
+    font-size: 2em;
+    margin: 0em 0em 0.5em;
   }
 
-  &--remove {
-    background: none;
-    border: none;
-    color: $water-text;
-  }
-}
-
-  &__display {
+&__display {
 
   }
 
@@ -44,26 +38,67 @@ body {
     display: block;
   }
 
-  &__type {
-    font-size: 2em;
-    margin-top: 0em;
+&__stats {
+    width: 200px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
+
+ &__max {
+    margin: 0.5em 0em;
+  }
+
+  
+
+  &__target {
+    margin: 0.5em 0em;
+ 
+  }
+
+&__button {
+
+  &--add {
+    font-weight: bold;
+    width: 216px;
+    height: 48px;
+    border: 0px;
+    border-radius: 4px;
+    color: $water-dark;
+    &:active{
+      background: $water-dark;
+      color: $water-text;
+    }
+  }
+
+  &--remove {
+    background: none;
+    border: none;
+    color: $water-text;
+        width: 162px;
+    height: 36px;
+    &:active{
+      color: $water-dark;
+    }
+
+  }
+}
+
+  
 
   &__value {
     max-width: 120px;
     font-size: 9em;
-    color: #000046;
+    color: $water-dark;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    bottom: 27%;
+    bottom: 46%;
+    transform: translate(-50%,46%);
 
     // margin-bottom: -1em;
     &--smaller {
       font-size: 6.2em;
-
-      bottom: 30%;
-      text-align: center;
     }
     text-align: center;
   }
@@ -72,4 +107,5 @@ body {
 
 .main-header {
   font-size: 3em;
+  margin-bottom: 0em;
 }
