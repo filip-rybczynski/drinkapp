@@ -19,12 +19,31 @@ if (entry) {
     counterValue.innerHTML = entry;
 }
 
+const entryRecord = localStorage.getItem('record');
+
+if (entryRecord) {
+counterMax.innerHTML = entryRecord;
+}
+
+    if (counterValue.innerHTML > 9) {
+        counterValue.style.fontSize = "6.2em"
+    }
+
 addButton.addEventListener("click", () => {
     counterValue.innerHTML++;
     localStorage.setItem(key, counterValue.innerHTML);
     if (counterValue.innerHTML == 10) {
         counterValue.style.fontSize = "6.2em"
     }
+
+    if (counterMax.innerHTML < counterValue.innerHTML) {
+        console.log('test');
+        counterMax.innerHTML = counterValue.innerHTML;
+        
+        localStorage.setItem('record', counterMax.innerHTML);
+    }
+
+
 })
 
 removeButton.addEventListener("click", () => {
