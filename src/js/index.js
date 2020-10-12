@@ -1,8 +1,8 @@
 import "../scss/main.scss";
 
 // uncomment the lines below to enable PWA
-// import {registerSW} from './pwa.js';
-// registerSW();
+import {registerSW} from './pwa.js';
+registerSW();
 
 /* place your code below */
 
@@ -19,11 +19,15 @@ if (entry) {
   counterValue.innerHTML = entry;
 }
 
-const entryRecord = localStorage.getItem("record");
+let entryRecord = '';
 
-if (entryRecord) {
-  counterMax.innerHTML = entryRecord;
+if(localStorage.getItem("record")) {
+    entryRecord = localStorage.getItem("record");
+} else {
+    entryRecord = 0;
 }
+
+  counterMax.innerHTML = entryRecord;
 
 if (counterValue.innerHTML > 9) {
   counterValue.style.fontSize = "6.2em";
@@ -35,7 +39,7 @@ addButton.addEventListener("click", () => {
 
 
   if (entryRecord < counterValue.innerHTML) {
-      console.log("test");
+      console.log(entryRecord);
     counterMax.innerHTML = counterValue.innerHTML;
 
     localStorage.setItem("record", counterMax.innerHTML);
@@ -52,7 +56,7 @@ removeButton.addEventListener("click", () => {
     localStorage.setItem(key, counterValue.innerHTML);
 
 
-    if (entryRecord < counterValue.innerHTML) {
+    if (entryRecord <= counterValue.innerHTML) {
       counterMax.innerHTML = counterValue.innerHTML;
 
       localStorage.setItem("record", counterMax.innerHTML);
@@ -63,3 +67,9 @@ removeButton.addEventListener("click", () => {
       }
   }
 });
+
+// let today = new Date();
+// const test = today.toISOString().slice(0,10);
+// console.log(test);
+// const yesterday = new Date() - 1;
+// console.log(yesterday);
