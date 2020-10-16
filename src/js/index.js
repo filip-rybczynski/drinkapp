@@ -11,7 +11,11 @@ const counterMax = document.querySelector(".max--js");
 const addButton = document.querySelector(".add--js");
 const removeButton = document.querySelector(".remove--js");
 
-const key = new Date().toISOString().slice(0, 10);
+// const today = new Date();
+// const yesterday = new Date(today);
+// yesterday.setDate(yesterday.getDate() - 1);
+
+const key = new Date().toLocaleString().slice(0, 10);
 
 const entry = localStorage.getItem(key);
 
@@ -33,13 +37,18 @@ if (counterValue.innerHTML > 9) {
   counterValue.style.fontSize = "6.2em";
 }
 
-addButton.addEventListener("click", () => {
-  counterValue.innerHTML++;
-  localStorage.setItem(key, counterValue.innerHTML);
 
+addButton.addEventListener("click", () => {
+  let boop;
+  boop = counterValue.innerHTML++;
+  console.log(boop);
+  console.log(counterValue.innerHTML);
+  localStorage.setItem(key, counterValue.innerHTML);
 
   if (entryRecord < counterValue.innerHTML) {
       console.log(entryRecord);
+      console.log(counterValue.innerHTML);
+      console.log(counterMax.interHTML);
     counterMax.innerHTML = counterValue.innerHTML;
 
     localStorage.setItem("record", counterMax.innerHTML);
@@ -72,4 +81,7 @@ removeButton.addEventListener("click", () => {
 // const test = today.toISOString().slice(0,10);
 // console.log(test);
 // const yesterday = new Date() - 1;
-// console.log(yesterday);
+let test = new Date();
+console.log(test);
+test = test.toISOString().slice(0, 10);
+console.log(test);
