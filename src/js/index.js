@@ -23,17 +23,17 @@ if (currentValue) {
   counterValue.innerHTML = currentValue;
 }
 
-// if (counterValue.innerHTML > 9) {
-//   counterValue.style.fontSize = "6.2em";
-// }
+if (currentValue > 9) {
+  counterValue.style.fontSize = "6.2em";
+}
 
 addButton.addEventListener("click", () => {
   counterValue.innerHTML = ++currentValue;
   localStorage.setItem(key, currentValue);
 
-  // if (counterValue.innerHTML == 10) {
-  //   counterValue.style.fontSize = "6.2em";
-  // }
+  if (currentValue == 10) {
+    counterValue.style.fontSize = "6.2em";
+  }
 });
 
 removeButton.addEventListener("click", () => {
@@ -42,7 +42,7 @@ removeButton.addEventListener("click", () => {
     localStorage.setItem(key, currentValue);
   }
 
-  // if (counterValue.innerHTML == 9) {
-  //     counterValue.style.fontSize = "9em";
-  //   }
+  if (currentValue == 9) {
+      counterValue.style.fontSize = "9em";
+    }
 });
