@@ -1,12 +1,12 @@
 {
-  "name": "WTF: PWA",
-  "short_name": "WTF: PWA",
-  "theme_color": "#2D2241",
-  "background_color": "#2D2241",
+  "name": "Drinkapp",
+  "short_name": "Drinkapp",
+  "theme_color": "#3767AD",
+  "background_color": "#3767AD",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/wtf-webpack-starter/",
-  "start_url": "/wtf-webpack-starter/",
+  "scope": "/drinkapp/",
+  "start_url": "/drinkapp/",
   "icons": [
     {
       "src": "pwa/manifest-icon-192.png",
