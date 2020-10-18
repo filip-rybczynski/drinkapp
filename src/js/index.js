@@ -20,23 +20,44 @@ const key = today.toLocaleString().slice(0, 10);
 
 const yesterKey = yesterday.toLocaleString().slice(0, 10);
 
-// liquidGraphic.style.opacity = 1;
 
-const boom = liquidGraphic.style.opacity;
-console.log(boom);
-const bada = getComputedStyle(liquidGraphic).getPropertyValue("opacity");
-console.log(bada);
-console.log(typeof bada);
-const bing = parseFloat(bada);
-console.log(bing);
-console.log(typeof bing);
+
+// liquidGraphic.style.opacity = 1;
 
 let currentValue = localStorage.getItem(key);
 let yesterdayValue = localStorage.getItem(yesterKey);
 let currentRecord = localStorage.getItem("record");
 
+function adjustOpacity2(image, currentValue, currentRecord)
+ {
+  console.log(`Record: ${currentRecord} / value: ${currentValue} = `);
+//
+  if(currentValue == 0) image.style.opacity = 0.3;
+  else if (currentValue >= currentRecord) image.style.opacity = 1;
+  else {
+    const fraction = currentValue/currentRecord;
+
+    console.log(fraction);
+  
+    let newOpacity = 0.3 + 0.7*fraction;
+
+    if (newOpacity > 1) newOpacity = 1;
+  
+    console.log(newOpacity);
+  
+    image.style.opacity = newOpacity.toFixed(2);
+  
+    console.log(parseFloat(
+      getComputedStyle(image).getPropertyValue("opacity")
+    ));
+  }
+}
+
 if (currentValue) {
   counterValue.innerHTML = currentValue;
+  adjustOpacity2(liquidGraphic, currentValue, currentRecord);
+} else {
+  currentValue = 0;
 }
 
 if (yesterdayValue) {
@@ -65,43 +86,54 @@ if (currentValue == 0) {
   liquidGraphic.style.opacity = 1;
 }
 
-const adjustOpacity = (currentRecord, currentValue, image, goal) => {
-  const divider = parseInt(currentRecord) - parseInt(currentValue);
+const adjustOpacity = (image, currentValue, goalValue, goalOpacity) => {
+  console.log(`Record: ${goalValue}, value: ${currentValue}`);
+
+  // First, check difference between goal value and currentvalue
+
+  const divider = parseInt(goalValue) - parseInt(currentValue);
+
+  console.log(`Divider: ${goalValue} - ${currentValue} = ${divider}`);
+
+  // get opacity value for the relevant graphic
 
   const currentOpacity = parseFloat(
     getComputedStyle(image).getPropertyValue("opacity")
   );
 
-  const delta = Math.abs(goal - currentOpacity);
+  console.log(`Current opacity value: ${currentOpacity}`);
 
-  if (divider > 0) {
-    return delta / divider;
-  } else {
-    return 0;
-  }
+  // get difference between current opacity value and goal opacity
+
+  const delta = Math.abs(goalOpacity - currentOpacity);
+
+  console.log(`Difference = ${delta}`);
+
+  // opacity needs to be changed by this
+  console.log(delta / divider);
+  let newOpacity = currentOpacity + delta / divider;
+
+  console.log(
+    `New Opacity value: ${currentOpacity} + ${delta / divider} = ${newOpacity} `
+  );
+
+  liquidGraphic.style.opacity = newOpacity.toFixed(2);
+
+  console.log("Function ran successfully");
 };
 
-console.log(adjustOpacity(5, 0, liquidGraphic, 1));
+console.log(currentRecord);
+
+adjustOpacity2(liquidGraphic, currentValue, currentRecord);
+
+  // adjustOpacity2(liquidGraphic, currentValue, currentRecord);
+
 
 addButton.addEventListener("click", () => {
-  if (currentRecord != 0) {
-    const increment = adjustOpacity(
-      currentRecord,
-      currentValue,
-      liquidGraphic,
-      1
-    );
+  // if (currentRecord == 0) liquidGraphic.style.opacity = 1;
 
-    let opacity = parseFloat(
-      getComputedStyle(liquidGraphic).getPropertyValue("opacity")
-    );
-
-    opacity = opacity + increment;
-
-    liquidGraphic.style.opacity = opacity.toFixed(2);
-  } else {
-    liquidGraphic.style.opacity = 1;
-  }
+  // if (currentRecord > currentValue)
+  //   adjustOpacity(liquidGraphic, currentValue, currentRecord, 1);
 
   counterValue.innerHTML = ++currentValue;
   localStorage.setItem(key, currentValue);
@@ -113,28 +145,14 @@ addButton.addEventListener("click", () => {
   if (currentValue == 10) {
     counterValue.style.fontSize = "6.2em";
   }
+
+  liquidGraphic.style.opacity = adjustOpacity2(liquidGraphic, currentValue, currentRecord);
+
 });
 
 removeButton.addEventListener("click", () => {
   if (currentValue > 0) {
-    if (currentValue > 1) {
-      const increment = adjustOpacity(
-        currentRecord,
-        currentValue,
-        liquidGraphic,
-        0.3
-      );
-
-      let opacity = parseFloat(
-        getComputedStyle(liquidGraphic).getPropertyValue("opacity")
-      );
-
-      opacity = opacity - increment;
-
-      liquidGraphic.style.opacity = opacity.toFixed(2);
-    } else {
-      liquidGraphic.style.opacity = 0.3;
-    }
+    // if (currentRecord >= currentValue) adjustOpacity(liquidGraphic, currentValue, 0, 0.3);
 
     counterValue.innerHTML = --currentValue;
     localStorage.setItem(key, currentValue);
@@ -146,5 +164,7 @@ removeButton.addEventListener("click", () => {
     if (currentValue == 9) {
       counterValue.style.fontSize = "9em";
     }
+
+    adjustOpacity2(liquidGraphic, currentValue, currentRecord);
   }
 });
