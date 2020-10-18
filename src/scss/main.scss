@@ -31,10 +31,13 @@ body {
 
 &__display {
 
+  background: url('../assets/img/glass.svg');
+  background-size: contain;
+
   }
 
   &__image {
-    opacity: 1;
+    opacity: 0.3;
     display: block;
   }
 
