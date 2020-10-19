@@ -33,6 +33,12 @@ const key = today.toLocaleString().slice(0, 10);
 
 let currentValue = localStorage.getItem(key);
 let currentRecord = localStorage.getItem("record");
+let lastDayOn = localStorage.getItem("last-day-on");
+// first ever: NULL
+// first on any given day: KEY for latest day the app was opened
+// following openings: KEY for the current day
+
+console.log(lastDayOn);
 
 if (currentValue) {
   counterValue.innerHTML = currentValue;
@@ -43,39 +49,53 @@ if (currentValue) {
 
 // SETTING RECORD:
 
-const allKeys = Object.keys(localStorage);
-
-if (currentRecord && allKeys.length > 3) {
-  /*Conditions check if record exists and if there are more than 3 elements in localStorage i.e. if there are 
-  keys for other dates than the current day (otherwise there will be an endless loop) */
-
-  let latest = new Date(today);
-  console.log(latest);
-  let latestValue = null;
-  console.log(latestValue);
-
-  do {
-    latest.setDate(latest.getDate() - 1);
-
-    console.log(latest);
-
-    const latestKey = latest.toLocaleString().slice(0, 10);
-
-    console.log(latestKey);
-
-    latestValue = localStorage.getItem(latestKey);
-
-    console.log(latestValue);
-  } while (latestValue == null);
-
-  if (latestValue > currentRecord) {
-    currentRecord = latestValue;
+if (lastDayOn != key && currentRecord) {
+  const latestValue = localStorage.getItem(lastDayOn);
+    if(currentRecord < latestValue) {
+      currentRecord = latestValue;
+      localStorage.setItem("record", currentRecord);
+    
+  } else {
+    currentRecord = 0;
     localStorage.setItem("record", currentRecord);
   }
-} else {
-  currentRecord = 0;
-  localStorage.setItem("record", currentRecord);
+  console.log(`Loop ran because ${lastDayOn} != ${key} and currentRecord exists with value: ${currentRecord}`);
 }
+
+
+// const allKeys = Object.keys(localStorage);
+
+// if (currentRecord && allKeys.length > 3) {
+//   /*Conditions check if record exists and if there are more than 3 elements in localStorage i.e. if there are 
+//   keys for other dates than the current day (otherwise there will be an endless loop) */
+
+//   let latest = new Date(today);
+//   console.log(latest);
+//   let latestValue = null;
+//   console.log(latestValue);
+
+//   do {
+//     latest.setDate(latest.getDate() - 1);
+
+//     console.log(latest);
+
+//     const latestKey = latest.toLocaleString().slice(0, 10);
+
+//     console.log(latestKey);
+
+//     latestValue = localStorage.getItem(latestKey);
+
+//     console.log(latestValue);
+//   } while (latestValue == null);
+
+//   if (latestValue > currentRecord) {
+//     currentRecord = latestValue;
+//     localStorage.setItem("record", currentRecord);
+//   }
+// } else {
+//   currentRecord = 0;
+//   localStorage.setItem("record", currentRecord);
+// }
 
 if (currentValue > currentRecord) {
   counterMax.innerHTML = currentValue;
@@ -88,6 +108,13 @@ if (currentValue > 9) {
 }
 
 liquidGraphic.style.opacity = adjustOpacity(currentValue, currentRecord);
+
+// Record current date as latest day of using app, if not recorded yet
+if(lastDayOn != key)
+{
+  lastDayOn = key;
+  localStorage.setItem("last-day-on", lastDayOn);
+}
 
 addButton.addEventListener("click", () => {
   counterValue.innerHTML = ++currentValue;
