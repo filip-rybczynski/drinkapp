@@ -51,10 +51,10 @@ if (lastDayOn != key && currentRecord) {
   if (currentRecord < latestValue) {
     currentRecord = latestValue;
     localStorage.setItem("record", currentRecord);
-  } else {
-    currentRecord = 0;
-    localStorage.setItem("record", currentRecord);
-  }
+  } 
+} else {
+  currentRecord = 0;
+  localStorage.setItem("record", currentRecord);
 }
 // Setting record counter in app
 if (currentValue > currentRecord) {
