@@ -29,14 +29,16 @@ const addButton = document.querySelector(".add--js");
 const removeButton = document.querySelector(".remove--js");
 const liquidGraphic = document.querySelector(".image--js");
 
+//creating the key for localStorage based on the current day
 const today = new Date();
 const key = today.toLocaleString().slice(0, 10);
 
-let currentValue = localStorage.getItem(key);
-let currentRecord = localStorage.getItem("record");
-let lastDayOn = localStorage.getItem("last-day-on");
+//getting values from localStorage
+let currentValue = localStorage.getItem(key); //set current counter value or leave variable empty
+let currentRecord = localStorage.getItem("record"); //set current counter value record
+let lastDayOn = localStorage.getItem("last-day-on"); //record last day the counter was turned on
 
-// Setting counter value in app
+// Displaying counter value in app
 if (currentValue) {
   counterValue.innerHTML = currentValue;
 } else {
@@ -44,7 +46,7 @@ if (currentValue) {
   localStorage.setItem(key, currentValue);
 }
 
-// SETTING RECORD based on last day app was used:
+// SETTING RECORD based on last day app was used
 
 if (lastDayOn != key && currentRecord) {
   const latestValue = localStorage.getItem(lastDayOn);
@@ -52,7 +54,7 @@ if (lastDayOn != key && currentRecord) {
     currentRecord = latestValue;
     localStorage.setItem("record", currentRecord);
   } 
-} else {
+} else { //if it's the first time turning on the app OR there's no current record value
   currentRecord = 0;
   localStorage.setItem("record", currentRecord);
 }
@@ -77,7 +79,7 @@ if (lastDayOn != key) {
   localStorage.setItem("last-day-on", lastDayOn);
 }
 
-// Add button functionality
+// "Add" button functionality
 addButton.addEventListener("click", () => {
   counterValue.innerHTML = ++currentValue;
   localStorage.setItem(key, currentValue);
